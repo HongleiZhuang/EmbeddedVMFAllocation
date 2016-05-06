@@ -1,0 +1,30 @@
+Embedded von Mises-Fisher Allocation
+Author: Honglei Zhuang (hzhuang3@illinois.edu)
+
+This code implements an Embedded von Mises-Fisher Allocation model based on word embedding.  
+
+=======USAGE EXAMPLE=======
+
+java -jar EmbeddedVMFAllocation.jar -corpus nyt.txt -wordembs vectors_sampled.txt [-options]
+
+Other options:
+-numvmf [int]       : Number of von Mises-Fisher topics (default=10)
+-vmfiter [int]      : Iteration over the entire corpus in Gibbs sampling for model inference  (default=50)
+
+
+===========OUTPUT==========
+
+The output is stored in models.vmfs
+
+The first line consists of three integers: 
+K, representing the number of vMF distributions; 
+L, the length of embedded vectors; 
+N, the number of documents respectively.
+
+Starting from the line 2 to line (2*K+1), every two lines represent a vMF distribution.  
+The first line is a real number, indicating the concentration parameter kappa of the vMF distribution.  
+The second line consists of L real number, as a (normalized) vector of the mean direction of the vMF distribution.  
+
+The following N lines represent the allocation probability of each document.  
+Each line consists of K real values, which parameterize a categorical (multinomial) distribution of the document.  
+Each number represents the probability that a word of this document is selected from the corresponding vMF distribution.  
